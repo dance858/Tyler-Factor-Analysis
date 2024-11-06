@@ -109,7 +109,7 @@ class RootMUSIC1D:
         En = get_noise_subspace(R, k)
         # Compute the coefficients for the polynomial.
         C = En @ En.T.conj()
-        coeff = np.zeros((m - 1,), dtype=np.complex_)
+        coeff = np.zeros((m - 1,), dtype=np.complex128)
         for i in range(1, m):
             coeff[i - 1] += np.sum(np.diag(C, i))
         coeff = np.hstack((coeff[::-1], np.sum(np.diag(C)), coeff.conj()))
