@@ -1,6 +1,4 @@
 # Tyler-Factor-Analysis
-
-# Maximum likelihood Toeplitz covariance estimation
 This repository hosts an implementation of the convex-concave procedure (CCP) for robustly fitting a statistical factor model by maximum likelihood estimation. For more information, see our [paper]().
 
 ## Recreating the figures in the paper
