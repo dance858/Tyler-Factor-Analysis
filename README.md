@@ -5,7 +5,7 @@ This repository hosts an implementation of the convex-concave procedure (CCP) fo
 There are three notebooks:
 * To recreate Figure 1, run ...
 * To recreate Figure 2, run MSE_run.ipynb. 
-* To recreate Figure 3, run ...
+* To recreate Figure 3, run DOA_run.ipynb.
 
 ## Citing
 If you wish to cite this work you may use the following BibTex:
