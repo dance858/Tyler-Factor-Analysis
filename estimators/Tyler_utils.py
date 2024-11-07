@@ -3,14 +3,11 @@ import numpy.linalg as LA
 from estimators.estimators_utils import PCFA_via_corr
 
 
-# TODO: should we normalize something?
 def Tyler_FA_init(X, k):
     # compute low rank decomposition S ~ F @ F.T + D of sample covariance S
     mu = np.mean(X, axis=1, keepdims=True)
     zero_mean_X = X - mu 
     S = (1 / X.shape[1]) * (zero_mean_X @ zero_mean_X.T)
-    
-    #S = Tyler_normalized_scatter_estimator_FP(X, 40)
     
     F, d = PCFA_via_corr(S, k)
 
@@ -18,9 +15,6 @@ def Tyler_FA_init(X, k):
     e0 = 1 / d
     evals, evecs = LA.eigh(np.eye(k) + (F.T * e0) @ F) 
     G0 = (F.T * e0).T @ (evecs * np.sqrt(1/evals)) @ evecs.T 
-
-    #res = LA.norm(LA.inv(np.diag(d) + F @ F.T) - (np.diag(e0) - G0 @ G0.T))
-    #G0_test = np.diag(e0) @ F @ LA.inv(sqrtm(np.eye(k) + F.T @ np.diag(e0) @ F))
 
     return G0, e0
 
@@ -58,3 +52,16 @@ def objective(G, e, X, X2, n, m, k):
     term1 = -np.sum(np.log(e)) - 2 * np.sum(np.log(np.diag(L)))
     obj = term1 + p_val 
     return obj
+
+# fixed-point iteration for Tyler's estimator (no factor model structure)
+def Tyler_FP(X, max_iter):
+    n, m = X.shape
+    Sigma = np.eye(n)
+    
+    for _ in range(1, max_iter + 1):
+        SigmainvX = LA.solve(Sigma, X)
+        a = 1 / np.sum(X * SigmainvX, axis=0) 
+        Sigma = (a * X) @ X.T
+        Sigma /= np.trace(Sigma)
+        
+    return Sigma
