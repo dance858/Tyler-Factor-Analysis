@@ -3,7 +3,7 @@ This repository hosts an implementation of the convex-concave procedure (CCP) fo
 
 ## Recreating the figures in the paper
 There are three notebooks:
-* To recreate Figure 1, run ...
+* To recreate Figure 1, run PCA_outliers.ipynb.
 * To recreate Figure 2, run MSE_run.ipynb. 
 * To recreate Figure 3, run DOA_run.ipynb.
 
@@ -12,7 +12,7 @@ If you wish to cite this work you may use the following BibTex:
 
 ```
 @article{Cederberg24,
-title = {},
+title = {Robust Factor Analysis Based on Tyler's M-estimator},
 journal = {},
 volume = {},
 pages = {},
